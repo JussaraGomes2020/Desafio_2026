@@ -24,7 +24,11 @@ module.exports = defineConfig({
   e2e: {
     baseUrl: "https://automationexercise.com",
 
-    specPattern: "cypress/e2e/**/*.feature",
+    // Executa arquivos .feature e também .cy.js
+    specPattern: [
+      "cypress/e2e/**/*.feature",
+      "cypress/e2e/**/*.cy.js",
+    ],
 
     supportFile: "cypress/support/e2e.js",
 
