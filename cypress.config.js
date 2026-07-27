@@ -21,6 +21,13 @@ async function setupNodeEvents(on, config) {
 }
 
 module.exports = defineConfig({
+
+  // Grava vídeos durante a execução em modo headless
+  video: true,
+
+  // Gera screenshot automaticamente quando um teste falha
+  screenshotOnRunFailure: true,
+
   e2e: {
     baseUrl: "https://automationexercise.com",
 
