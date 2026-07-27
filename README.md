@@ -1,10 +1,12 @@
-# Desafio QA - Automação Web e API com Cypress
+# Desafio Técnico QA – Automação Web e API com Cypress
 
 ## Sobre o projeto
 
-Este projeto foi desenvolvido como parte de um desafio técnico para avaliação de conhecimentos em **Qualidade de Software (QA)**, contemplando a automação de testes funcionais Web e testes de API utilizando **Cypress**.
+Este projeto foi desenvolvido como parte de um desafio técnico para demonstrar conhecimentos em **Qualidade de Software (QA)**, contemplando a automação de testes funcionais Web e testes de API utilizando **Cypress**.
 
-Foram aplicadas boas práticas de organização, reutilização de código e manutenção, utilizando **Page Object Model (POM)**, **BDD com Cucumber** e separação entre testes Web e API.
+A solução foi estruturada priorizando organização, reutilização de código, facilidade de manutenção e escalabilidade, aplicando o padrão **Page Object Model (POM)** para os testes Web e **BDD (Behavior Driven Development)** com **Cucumber** para descrição dos cenários.
+
+Além dos fluxos Web, foi implementado um teste automatizado de API utilizando o comando `cy.request()`, realizando validações da resposta e dos dados retornados.
 
 ---
 
@@ -21,7 +23,7 @@ Foram aplicadas boas práticas de organização, reutilização de código e man
 
 ---
 
-# Versões utilizadas
+# Ambiente
 
 | Tecnologia | Versão |
 |------------|---------|
@@ -35,19 +37,20 @@ Foram aplicadas boas práticas de organização, reutilização de código e man
 
 ---
 
-# Arquitetura
+# Arquitetura da solução
 
-O projeto foi estruturado utilizando o padrão **Page Object Model (POM)** para promover:
+O projeto foi estruturado utilizando o padrão **Page Object Model (POM)**, promovendo a separação entre regras de negócio, elementos da interface e cenários de teste.
+
+Essa abordagem proporciona:
 
 - Separação de responsabilidades;
 - Reutilização de código;
 - Facilidade de manutenção;
-- Melhor legibilidade dos testes;
+- Melhor legibilidade;
+- Redução de duplicidade;
 - Escalabilidade para inclusão de novos cenários.
 
-Os testes Web foram desenvolvidos utilizando **BDD (Behavior Driven Development)** com **Cucumber**.
-
-Os testes de API foram implementados utilizando o comando `cy.request()` do Cypress.
+Os testes Web foram desenvolvidos utilizando **BDD (Behavior Driven Development)** com **Cucumber**, enquanto os testes de API utilizam os recursos nativos do Cypress através do comando `cy.request()`.
 
 ---
 
@@ -85,7 +88,7 @@ DESAFIO_CYPRESS
 
 # Pré-requisitos
 
-Antes de executar o projeto, é necessário possuir instalado:
+Antes da execução do projeto é necessário possuir instalado:
 
 - Node.js 24.18.0 ou superior
 - npm 11.16.0 ou superior
@@ -101,13 +104,13 @@ Clone o repositório:
 git clone https://github.com/JussaraGomes2020/Desafio_2026.git
 ```
 
-Entre na pasta do projeto:
+Acesse a pasta do projeto:
 
 ```bash
 cd Desafio_2026
 ```
 
-Instale todas as dependências:
+Instale as dependências:
 
 ```bash
 npm install
@@ -131,7 +134,7 @@ npx cypress open
 
 ---
 
-## Executar todos os testes
+## Executar todos os testes (modo headless)
 
 ```bash
 npm run cy:run
@@ -145,7 +148,7 @@ npx cypress run
 
 ---
 
-## Executar apenas os testes Web (BDD)
+## Executar apenas os testes Web
 
 ```bash
 npx cypress run --spec "cypress/e2e/**/*.feature"
@@ -153,7 +156,7 @@ npx cypress run --spec "cypress/e2e/**/*.feature"
 
 ---
 
-## Executar apenas o teste da API
+## Executar apenas o teste de API
 
 ```bash
 npx cypress run --spec "cypress/e2e/api/trello.cy.js"
@@ -161,25 +164,25 @@ npx cypress run --spec "cypress/e2e/api/trello.cy.js"
 
 ---
 
-# Funcionalidades automatizadas
+# Cenários automatizados
 
 ## Testes Web
 
-Foram automatizados os seguintes fluxos:
+Os seguintes fluxos foram automatizados:
 
 - Login
-- Cadastro de Usuário
+- Cadastro de usuário
 - Produtos
 - Carrinho
 - Checkout
 
-Os cenários foram escritos utilizando **BDD (Gherkin)** e implementados através do **Cucumber**.
+Os cenários foram escritos em **Gherkin** e implementados utilizando **Cucumber**, seguindo a abordagem **BDD**.
 
 ---
 
 ## Testes de API
 
-Foi implementado um teste automatizado para consumo da API do Trello.
+Foi automatizado o consumo de um endpoint público do Trello.
 
 ### Endpoint
 
@@ -189,7 +192,7 @@ GET https://api.trello.com/1/actions/592f11060f95a3d3d46a987a
 
 ### Validações realizadas
 
-- Status Code 200
+- Status Code **200**
 - Validação do campo:
 
 ```json
@@ -202,7 +205,7 @@ Valor esperado:
 Professional
 ```
 
-Durante a execução também é exibido o valor retornado pela API através do comando:
+Durante a execução também é exibido no log o valor retornado pela API:
 
 ```javascript
 cy.log(`Nome da lista: ${response.body.data.list.name}`);
@@ -212,50 +215,35 @@ cy.log(`Nome da lista: ${response.body.data.list.name}`);
 
 # Boas práticas adotadas
 
-- ✔ Page Object Model (POM)
-- ✔ BDD com Cucumber
-- ✔ Organização por responsabilidade
-- ✔ Separação entre testes Web e API
-- ✔ Centralização de endpoints
-- ✔ Reutilização de código
-- ✔ Estrutura escalável
-- ✔ Utilização de utilitários compartilhados
-- ✔ Validação de respostas da API
-- ✔ Código organizado para facilitar manutenção
+- Page Object Model (POM)
+- BDD com Cucumber
+- Organização por responsabilidade
+- Separação entre testes Web e API
+- Centralização de endpoints
+- Reutilização de código
+- Utilização de Fixtures
+- Utilização de utilitários compartilhados
+- Estrutura escalável
+- Código organizado para facilitar manutenção
+- Validação de respostas da API
 
 ---
 
-# Evidências da execução
+# Evidências
 
-## Testes Web
+As evidências de execução podem ser armazenadas na pasta:
 
-Adicionar a captura de tela da execução dos cenários Web.
-
-Exemplo:
-
-```
+```text
 evidencias/
-└── web-tests.png
-```
-
-```markdown
-![Testes Web](./evidencias/web-tests.png)
-```
-
----
-
-## Teste da API
-
-Adicionar a captura de tela da execução do teste da API.
-
-Exemplo:
-
-```
-evidencias/
+├── web-tests.png
 └── api-trello.png
 ```
 
+Após adicionar as imagens, basta referenciá-las no README:
+
 ```markdown
+![Testes Web](./evidencias/web-tests.png)
+
 ![Teste API Trello](./evidencias/api-trello.png)
 ```
 
@@ -263,11 +251,22 @@ evidencias/
 
 # Melhorias futuras
 
-- Implementação de relatórios de execução (Mochawesome ou Allure Report);
-- Integração contínua (CI) utilizando GitHub Actions;
+Como evolução deste projeto, podem ser implementadas as seguintes melhorias:
+
+- Relatórios de execução utilizando Mochawesome ou Allure Report;
+- Pipeline de Integração Contínua com GitHub Actions;
 - Execução parametrizada por ambiente;
-- Ampliação da cobertura de testes de API;
-- Geração automática de massa de dados para testes.
+- Ampliação da cobertura dos testes de API;
+- Geração dinâmica de massa de dados para testes;
+- Integração com ferramentas de qualidade e análise de código.
+
+---
+
+# Nota de Transparência
+
+Durante o desenvolvimento deste desafio utilizei **Inteligência Artificial (ChatGPT)** como ferramenta de apoio para pesquisa, esclarecimento de dúvidas, revisão técnica, organização da documentação e discussão de alternativas de implementação.
+
+Todas as decisões relacionadas à arquitetura da solução, implementação dos testes, validação dos resultados, adaptações no código e organização do projeto foram analisadas, compreendidas e validadas por mim. O uso da IA teve como objetivo apoiar o processo de desenvolvimento, sem substituir o entendimento técnico ou a responsabilidade sobre a solução entregue.
 
 ---
 
@@ -275,4 +274,6 @@ evidencias/
 
 **Jussara Gomes**
 
-Projeto desenvolvido como parte de um desafio técnico para demonstração de conhecimentos em automação de testes Web e API utilizando Cypress.
+Profissional de Qualidade de Software (QA) com experiência em testes manuais e automatizados, focada na construção de soluções organizadas, reutilizáveis e sustentáveis.
+
+Projeto desenvolvido como parte de um desafio técnico para demonstrar conhecimentos em automação de testes Web e API utilizando Cypress.
