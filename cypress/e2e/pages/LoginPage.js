@@ -14,6 +14,7 @@ class LoginPage extends BasePage {
 
     botaoExcluirConta = 'a[href="/delete_account"]';
 
+
     // Mensagens
 
     mensagemUsuarioLogado = "Logged in as";
@@ -43,24 +44,36 @@ class LoginPage extends BasePage {
     }
 
     realizarLogin(email, senha) {
+
+        this.acessarTelaLogin();
+
         this.informarEmail(email);
+
         this.informarSenha(senha);
+
         this.clicarBotaoLogin();
+
+        this.validarLoginRealizado();
+
     }
 
 
     // Validações
 
     validarLoginRealizado() {
+
         this.validarTextoVisivel(this.mensagemUsuarioLogado);
 
         this.validarElementoVisivel(this.botaoLogout);
 
         this.validarElementoVisivel(this.botaoExcluirConta);
+
     }
 
     validarMensagemLoginInvalido() {
+
         this.validarTextoVisivel(this.mensagemLoginInvalido);
+
     }
 
 }
