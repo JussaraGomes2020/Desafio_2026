@@ -33,6 +33,10 @@ jobs:
 
       - name: Executar testes
         run: npm test
+        env:
+          CYPRESS_TRELLO_KEY: ${{ secrets.TRELLO_KEY }}
+          CYPRESS_TRELLO_TOKEN: ${{ secrets.TRELLO_TOKEN }}
+          CYPRESS_TRELLO_ACTION_ID: ${{ secrets.TRELLO_ACTION_ID }}
 
       - name: Publicar relatório Mochawesome
         if: always()
