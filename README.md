@@ -262,7 +262,7 @@ Como evolução deste projeto, podem ser implementadas as seguintes melhorias:
 
 ---
 
-# Nota de Transparência
+# Nota de Transparência Ética
 
 Durante o desenvolvimento deste desafio utilizei **Inteligência Artificial (ChatGPT)** como ferramenta de apoio para pesquisa, esclarecimento de dúvidas, revisão técnica, organização da documentação e discussão de alternativas de implementação.
 
