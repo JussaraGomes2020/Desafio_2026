@@ -4,7 +4,7 @@ import {
   Then,
 } from "@badeball/cypress-cucumber-preprocessor";
 
-import CadastroUsuarioPage from "../pages/CadastroUsuarioPage";
+import CadastroUsuarioPage from "../../pages/CadastroUsuarioPage";
 import { gerarEmail } from "../../fixtures/data/UsuarioFactory";
 
 let usuario;

@@ -6,10 +6,10 @@ import {
 
 import login from "../../fixtures/login/login.json";
 
-import LoginPage from "../pages/LoginPage";
-import ProdutosPage from "../pages/ProdutosPage";
-import CarrinhoPage from "../pages/CarrinhoPage";
-import CheckoutPage from "../pages/CheckoutPage";
+import LoginPage from "../../pages/LoginPage";
+import ProdutosPage from "../../pages/ProdutosPage";
+import CarrinhoPage from "../../pages/CarrinhoPage";
+import CheckoutPage from "../../pages/CheckoutPage";
 
 Given("que o usuário está autenticado", () => {
 

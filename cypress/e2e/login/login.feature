@@ -9,4 +9,4 @@ Feature: Login
 
   Scenario: Login inválido
     When realizo o login com um usuário inválido
-    Then devo visualizar uma mensagem informando que o login é inválido
+    Then devo visualizar uma mensagem de login inválido

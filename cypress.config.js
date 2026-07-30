@@ -1,15 +1,22 @@
 const { defineConfig } = require("cypress");
 const createBundler = require("@bahmutov/cypress-esbuild-preprocessor");
+
 const {
   addCucumberPreprocessorPlugin,
 } = require("@badeball/cypress-cucumber-preprocessor");
+
 const {
   createEsbuildPlugin,
 } = require("@badeball/cypress-cucumber-preprocessor/esbuild");
 
 async function setupNodeEvents(on, config) {
+  // Plugin do Cucumber
   await addCucumberPreprocessorPlugin(on, config);
 
+  // Plugin do Mochawesome
+  require("cypress-mochawesome-reporter/plugin")(on);
+
+  // Pré-processador do Cucumber
   on(
     "file:preprocessor",
     createBundler({
@@ -21,17 +28,28 @@ async function setupNodeEvents(on, config) {
 }
 
 module.exports = defineConfig({
+  // Reporter
+  reporter: "cypress-mochawesome-reporter",
 
-  // Grava vídeos durante a execução em modo headless
+  reporterOptions: {
+    reportDir: "cypress/reports",
+    overwrite: false,
+    charts: true,
+    reportPageTitle: "Relatório de Automação",
+    embeddedScreenshots: true,
+    inlineAssets: true,
+    saveAllAttempts: false,
+  },
+
+  // Vídeos
   video: true,
 
-  // Gera screenshot automaticamente quando um teste falha
+  // Screenshots automáticos
   screenshotOnRunFailure: true,
 
   e2e: {
     baseUrl: "https://automationexercise.com",
 
-    // Executa arquivos .feature e também .cy.js
     specPattern: [
       "cypress/e2e/**/*.feature",
       "cypress/e2e/**/*.cy.js",

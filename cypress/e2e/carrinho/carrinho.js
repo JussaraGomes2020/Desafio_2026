@@ -4,8 +4,8 @@ import {
   Then,
 } from "@badeball/cypress-cucumber-preprocessor";
 
-import ProdutosPage from "../pages/ProdutosPage";
-import CarrinhoPage from "../pages/CarrinhoPage";
+import ProdutosPage from "../../pages/ProdutosPage";
+import CarrinhoPage from "../../pages/CarrinhoPage";
 
 Given("que estou na página de produtos", () => {
   ProdutosPage.acessarTelaProdutos();

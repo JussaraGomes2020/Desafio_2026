@@ -4,11 +4,11 @@ import {
   Then,
 } from "@badeball/cypress-cucumber-preprocessor";
 
-import LoginPage from "../pages/LoginPage";
+import LoginPage from "../../pages/LoginPage";
 
 let loginData;
 
-before(() => {
+beforeEach(() => {
   cy.fixture("login/login").then((fixture) => {
     loginData = fixture;
   });
