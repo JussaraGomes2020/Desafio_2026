@@ -280,7 +280,6 @@ Foram verificadas as seguintes condições:
 
 ![Pipeline GitHub Actions](evidencias/pipeline-success.png)
 
-
 # Nota de Transparência 
 
 Durante o desenvolvimento deste desafio utilizei **Inteligência Artificial (ChatGPT)** como ferramenta de apoio para pesquisa, esclarecimento de dúvidas, revisão técnica, organização da documentação e discussão de alternativas de implementação.
