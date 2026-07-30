@@ -261,8 +261,27 @@ Como evolução deste projeto, podem ser implementadas as seguintes melhorias:
 - Integração com ferramentas de qualidade e análise de código.
 
 ---
+## Evidências da validação da API
 
-# Nota de Transparência Ética
+Antes da implementação da automação, foi realizada uma validação manual do endpoint utilizando o Postman para confirmar o comportamento esperado da API.
+
+Foram verificadas as seguintes condições:
+
+- Status Code **200 OK**;
+- Estrutura da resposta JSON;
+- Retorno do campo `data.list.name`;
+- Valor esperado: **Professional**.
+
+### Validação manual da API (Postman)
+
+![Validação da API no Postman](evidencias/postman-api.png)
+
+### Execução da pipeline (GitHub Actions)
+
+![Pipeline GitHub Actions](evidencias/pipeline-success.png)
+
+
+# Nota de Transparência 
 
 Durante o desenvolvimento deste desafio utilizei **Inteligência Artificial (ChatGPT)** como ferramenta de apoio para pesquisa, esclarecimento de dúvidas, revisão técnica, organização da documentação e discussão de alternativas de implementação.
 
