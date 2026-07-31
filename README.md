@@ -204,7 +204,7 @@ Durante o desenvolvimento optei por algumas decisões para deixar o projeto mais
 - Centralização dos endpoints da API;
 - Uso de variáveis de ambiente para armazenar credenciais;
 - Scripts separados para execução da suíte completa, apenas Web e apenas API;
-- Organização das funcionalidades em diretórios independentes.
+- Organização das funcionalidades em diretórios independentes;
 
 ---
 
@@ -236,6 +236,8 @@ Caso o projeto continuasse sendo desenvolvido, alguns próximos passos seriam:
 ---
 
 # Sobre o uso de IA
+    
+    Nota Ética
 
 Durante o desenvolvimento utilizei o ChatGPT como apoio para pesquisa, revisão de código e discussão de alternativas de implementação.
 
