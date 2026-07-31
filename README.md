@@ -2,72 +2,60 @@
 
 ## Sobre o projeto
 
-Este projeto foi desenvolvido como parte de um desafio técnico para demonstrar conhecimentos em **Qualidade de Software (QA)**, contemplando a automação de testes funcionais Web e testes de API utilizando **Cypress**.
+Este projeto foi desenvolvido como parte de um desafio técnico para demonstrar conhecimentos em automação de testes Web e API utilizando **Cypress**.
 
-A solução foi estruturada priorizando organização, reutilização de código, facilidade de manutenção e escalabilidade, aplicando o padrão **Page Object Model (POM)** para os testes Web e **BDD (Behavior Driven Development)** com **Cucumber** para descrição dos cenários.
+A solução contempla:
 
-Além dos fluxos Web, foi implementado um teste automatizado de API utilizando o comando `cy.request()`, realizando validações da resposta e dos dados retornados.
+- Automação de testes funcionais Web utilizando **Cypress**, **Cucumber** e **Page Object Model (POM)**;
+- Automação de um teste de API utilizando o comando `cy.request()`;
+- Organização da suíte para facilitar manutenção e evolução dos testes.
+
+Durante o desenvolvimento procurei manter a separação entre a lógica dos testes, os elementos das páginas e os dados utilizados na automação, deixando cada responsabilidade em um único lugar.
 
 ---
 
 # Tecnologias utilizadas
 
 - JavaScript (ES6+)
-- Node.js
-- npm
 - Cypress
 - Cucumber
-- Esbuild
+- Node.js
+- npm
 - Git
 - GitHub
 - GitHub Actions
 
 ---
 
-# Ambiente
+# Ambiente utilizado
 
 | Tecnologia | Versão |
 |------------|---------|
 | Node.js | 24.18.0 |
 | npm | 11.16.0 |
 | Cypress | 15.19.0 |
-| JavaScript | ES6+ |
-| @badeball/cypress-cucumber-preprocessor | 26.0.0 |
-| @bahmutov/cypress-esbuild-preprocessor | 2.2.8 |
-| Esbuild | 0.28.1 |
 
 ---
 
-# Arquitetura da solução
+# Organização do projeto
 
-O projeto foi estruturado utilizando o padrão **Page Object Model (POM)**, promovendo a separação entre regras de negócio, elementos da interface e cenários de teste.
+A estrutura foi organizada separando os testes Web dos testes de API.
 
-Essa abordagem proporciona:
+Nos testes Web utilizei **Page Object Model**, concentrando os seletores e ações das páginas em classes específicas para evitar repetição de código.
 
-- Separação de responsabilidades;
-- Reutilização de código;
-- Facilidade de manutenção;
-- Melhor legibilidade;
-- Redução de duplicidade;
-- Escalabilidade para inclusão de novos cenários.
+Os cenários foram escritos em **Gherkin** utilizando **Cucumber**, deixando a leitura mais próxima do fluxo funcional.
 
-Os testes Web foram desenvolvidos utilizando **BDD (Behavior Driven Development)** com **Cucumber**, enquanto os testes de API utilizam os recursos nativos do Cypress através do comando `cy.request()`.
+Os testes de API utilizam o próprio recurso nativo do Cypress (`cy.request()`), sem necessidade de bibliotecas adicionais.
 
----
-
-# Estrutura do projeto
-
-```text
+```
 DESAFIO_CYPRESS
 │
 ├── .github
 │   └── workflows
-│       └── cypress.yml
 │
 ├── cypress
 │   ├── e2e
 │   │   ├── api
-│   │   │   └── trello.cy.js
 │   │   ├── cadastrar_usuario
 │   │   ├── carrinho
 │   │   ├── checkout
@@ -75,25 +63,13 @@ DESAFIO_CYPRESS
 │   │   └── produtos
 │   │
 │   ├── fixtures
-│   │   ├── cadastro_usuario
-│   │   ├── data
-│   │   ├── login
-│   │   ├── produto
-│   │   └── usuarios
-│   │
 │   ├── pages
-│   ├── reports
-│   ├── screenshots
 │   ├── support
-│   ├── utils
-│   └── videos
+│   └── utils
 │
 ├── evidencias
-│   ├── pipeline-success.png
-│   └── postman-api.png
 │
 ├── package.json
-├── package-lock.json
 ├── cypress.config.js
 └── README.md
 ```
@@ -102,10 +78,8 @@ DESAFIO_CYPRESS
 
 # Pré-requisitos
 
-Antes da execução do projeto é necessário possuir instalado:
-
-- Node.js 24.18.0 ou superior
-- npm 11.16.0 ou superior
+- Node.js
+- npm
 - Git
 
 ---
@@ -118,7 +92,7 @@ Clone o repositório:
 git clone https://github.com/JussaraGomes2020/Desafio_2026.git
 ```
 
-Acesse a pasta do projeto:
+Entre na pasta do projeto:
 
 ```bash
 cd Desafio_2026
@@ -132,57 +106,61 @@ npm install
 
 ---
 
+# Configuração da API
+
+Para executar o teste de API é necessário criar um arquivo chamado:
+
+```text
+cypress.env.json
+```
+
+com as credenciais do Trello:
+
+```json
+{
+  "TRELLO_KEY": "SUA_KEY",
+  "TRELLO_TOKEN": "SEU_TOKEN",
+  "TRELLO_ACTION_ID": "SEU_ACTION_ID"
+}
+```
+
+Esse arquivo não faz parte do repositório e está listado no `.gitignore`.
+
+---
+
 # Execução dos testes
 
-## Abrir o Cypress (modo interativo)
+Abrir o Cypress:
 
 ```bash
 npm run cy:open
 ```
 
-ou
-
-```bash
-npx cypress open
-```
-
----
-
-## Executar todos os testes (modo headless)
+Executar toda a suíte:
 
 ```bash
 npm run cy:run
 ```
 
-ou
+Executar apenas os testes Web:
 
 ```bash
-npx cypress run
+npm run test:web
 ```
 
----
-
-## Executar apenas os testes Web
+Executar apenas o teste de API:
 
 ```bash
-npx cypress run --spec "cypress/e2e/**/*.feature"
-```
-
----
-
-## Executar apenas o teste de API
-
-```bash
-npx cypress run --spec "cypress/e2e/api/trello.cy.js"
+npm run test:api
 ```
 
 ---
 
 # Cenários automatizados
 
-## Testes Web
+## Web
 
-Foram automatizados os seguintes fluxos:
+Foram automatizados os seguintes fluxos da aplicação:
 
 - Login
 - Cadastro de usuário
@@ -190,90 +168,78 @@ Foram automatizados os seguintes fluxos:
 - Carrinho
 - Checkout
 
-Todos os cenários foram escritos em **Gherkin** e implementados utilizando **BDD com Cucumber**.
+Todos os cenários foram escritos em Gherkin e implementados utilizando Cucumber.
 
 ---
 
-## Testes de API
+## API
 
-Foi automatizado o consumo da API do Trello utilizando autenticação via **key** e **token**.
+Foi automatizado um teste utilizando a API pública do Trello.
 
-### Endpoint
+Endpoint utilizado:
 
 ```http
-GET https://api.trello.com/1/members/me/actions?limit=10
+GET /1/actions/{actionId}
 ```
 
-Durante a execução é realizada a busca pelas ações do usuário e validado o retorno do cartão esperado.
+A autenticação é realizada através de **key** e **token**, enviados como parâmetros da requisição.
 
-### Validações realizadas
+Durante o teste são realizadas as seguintes validações:
 
-- Status Code **200 OK**
-- Estrutura da resposta JSON
-- Retorno do campo `data.list.name`
-- Valor esperado: **Professional**
+- Status Code 200;
+- Estrutura da resposta;
+- Campo `data.list.name`;
+- Valor esperado: `Professional`.
 
-Também é exibido no log da execução:
-
-```javascript
-cy.log(`Nome da lista: ${body.data.list.name}`);
-```
+Também é registrado no log o nome da lista retornada pela API.
 
 ---
 
-# Boas práticas adotadas
+# Decisões de implementação
 
-- Page Object Model (POM)
-- BDD com Cucumber
-- Organização por responsabilidade
-- Separação entre testes Web e API
-- Centralização de endpoints
-- Utilização de Fixtures
-- Reutilização de código
-- Utilização de utilitários compartilhados
-- Estrutura escalável
-- Pipeline de Integração Contínua com GitHub Actions
-- Validação de respostas da API
+Durante o desenvolvimento optei por algumas decisões para deixar o projeto mais organizado:
+
+- Separação entre testes Web e API;
+- Utilização de Page Object Model nos testes Web;
+- Centralização dos endpoints da API;
+- Uso de variáveis de ambiente para armazenar credenciais;
+- Scripts separados para execução da suíte completa, apenas Web e apenas API;
+- Organização das funcionalidades em diretórios independentes.
 
 ---
 
-# Evidências da validação da API
+# Evidências
 
-Antes da implementação da automação, foi realizada uma validação manual do endpoint utilizando o Postman para confirmar o comportamento esperado da API.
+Antes da automação da API foi realizada uma validação manual utilizando o Postman para confirmar o comportamento esperado do endpoint.
 
-Foram verificadas as seguintes condições:
+### Validação da API
 
-- Status Code **200 OK**
-- Estrutura da resposta JSON
-- Retorno do campo `data.list.name`
-- Valor esperado: **Professional**
+![Validação da API](evidencias/postman-api.png)
 
-### Validação manual da API (Postman)
+### Pipeline
 
-![Validação da API no Postman](evidencias/postman-api.png)
+O projeto também possui uma pipeline de execução utilizando GitHub Actions.
 
-### Execução da pipeline (GitHub Actions)
-
-![Pipeline GitHub Actions](evidencias/pipeline-success.png)
+![Pipeline](evidencias/pipeline-success.png)
 
 ---
 
-# Melhorias futuras
+# Possíveis evoluções
 
-Como evolução deste projeto, podem ser implementadas as seguintes melhorias:
+Caso o projeto continuasse sendo desenvolvido, alguns próximos passos seriam:
 
-- Relatórios de execução utilizando Allure Report;
-- Execução paralela dos testes;
-- Ampliação da cobertura dos testes de API;
-- Integração com ferramentas de análise contínua de qualidade (SonarQube ou SonarCloud).
+- ampliar a cobertura dos testes de API;
+- adicionar relatórios utilizando Allure;
+- executar testes em paralelo;
+- integrar ferramentas de análise de qualidade, como SonarQube.
 
 ---
 
-# Nota de Transparência
+# Sobre o uso de IA
 
-Durante o desenvolvimento deste desafio utilizei **Inteligência Artificial (ChatGPT)** como ferramenta de apoio para pesquisa, esclarecimento de dúvidas, revisão técnica, organização da documentação e discussão de alternativas de implementação.
+Durante o desenvolvimento utilizei o ChatGPT como apoio para pesquisa, revisão de código e discussão de alternativas de implementação.
 
-Todas as decisões relacionadas à arquitetura da solução, implementação dos testes, validação dos resultados, adaptações no código e organização do projeto foram analisadas, compreendidas e validadas por mim. O uso da IA teve como objetivo apoiar o processo de desenvolvimento, sem substituir o entendimento técnico ou a responsabilidade sobre a solução entregue.
+As sugestões foram analisadas e adaptadas ao contexto do desafio. Sempre que necessário, realizei ajustes na implementação para atender aos requisitos da aplicação e validar o comportamento esperado.
 
 ---
 
@@ -281,6 +247,6 @@ Todas as decisões relacionadas à arquitetura da solução, implementação dos
 
 **Jussara Gomes**
 
-Profissional de Qualidade de Software (QA) com experiência em testes manuais e automatizados, focada na construção de soluções organizadas, reutilizáveis e sustentáveis.
+Profissional de Qualidade de Software (QA) com experiência em testes manuais e automatizados.
 
-Projeto desenvolvido como parte de um desafio técnico para demonstrar conhecimentos em automação de testes Web e API utilizando Cypress.
+Este projeto foi desenvolvido como parte de um desafio técnico para demonstrar conhecimentos em automação de testes Web e API utilizando Cypress.
