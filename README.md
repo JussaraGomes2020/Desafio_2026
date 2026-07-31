@@ -20,6 +20,7 @@ Além dos fluxos Web, foi implementado um teste automatizado de API utilizando o
 - Esbuild
 - Git
 - GitHub
+- GitHub Actions
 
 ---
 
@@ -59,6 +60,10 @@ Os testes Web foram desenvolvidos utilizando **BDD (Behavior Driven Development)
 ```text
 DESAFIO_CYPRESS
 │
+├── .github
+│   └── workflows
+│       └── cypress.yml
+│
 ├── cypress
 │   ├── e2e
 │   │   ├── api
@@ -67,19 +72,28 @@ DESAFIO_CYPRESS
 │   │   ├── carrinho
 │   │   ├── checkout
 │   │   ├── login
-│   │   ├── pages
-│   │   ├── produtos
-│   │   └── services
+│   │   └── produtos
 │   │
 │   ├── fixtures
+│   │   ├── cadastro_usuario
+│   │   ├── data
+│   │   ├── login
+│   │   ├── produto
+│   │   └── usuarios
+│   │
+│   ├── pages
+│   ├── reports
+│   ├── screenshots
 │   ├── support
-│   └── utils
-│       ├── constantes.js
-│       ├── endpoints.js
-│       ├── faker.js
-│       └── helpers.js
+│   ├── utils
+│   └── videos
+│
+├── evidencias
+│   ├── pipeline-success.png
+│   └── postman-api.png
 │
 ├── package.json
+├── package-lock.json
 ├── cypress.config.js
 └── README.md
 ```
@@ -168,7 +182,7 @@ npx cypress run --spec "cypress/e2e/api/trello.cy.js"
 
 ## Testes Web
 
-Os seguintes fluxos foram automatizados:
+Foram automatizados os seguintes fluxos:
 
 - Login
 - Cadastro de usuário
@@ -176,39 +190,33 @@ Os seguintes fluxos foram automatizados:
 - Carrinho
 - Checkout
 
-Os cenários foram escritos em **Gherkin** e implementados utilizando **Cucumber**, seguindo a abordagem **BDD**.
+Todos os cenários foram escritos em **Gherkin** e implementados utilizando **BDD com Cucumber**.
 
 ---
 
 ## Testes de API
 
-Foi automatizado o consumo de um endpoint público do Trello.
+Foi automatizado o consumo da API do Trello utilizando autenticação via **key** e **token**.
 
 ### Endpoint
 
 ```http
-GET https://api.trello.com/1/actions/592f11060f95a3d3d46a987a
+GET https://api.trello.com/1/members/me/actions?limit=10
 ```
+
+Durante a execução é realizada a busca pelas ações do usuário e validado o retorno do cartão esperado.
 
 ### Validações realizadas
 
-- Status Code **200**
-- Validação do campo:
+- Status Code **200 OK**
+- Estrutura da resposta JSON
+- Retorno do campo `data.list.name`
+- Valor esperado: **Professional**
 
-```json
-data.list.name
-```
-
-Valor esperado:
-
-```text
-Professional
-```
-
-Durante a execução também é exibido no log o valor retornado pela API:
+Também é exibido no log da execução:
 
 ```javascript
-cy.log(`Nome da lista: ${response.body.data.list.name}`);
+cy.log(`Nome da lista: ${body.data.list.name}`);
 ```
 
 ---
@@ -220,57 +228,25 @@ cy.log(`Nome da lista: ${response.body.data.list.name}`);
 - Organização por responsabilidade
 - Separação entre testes Web e API
 - Centralização de endpoints
-- Reutilização de código
 - Utilização de Fixtures
+- Reutilização de código
 - Utilização de utilitários compartilhados
 - Estrutura escalável
-- Código organizado para facilitar manutenção
+- Pipeline de Integração Contínua com GitHub Actions
 - Validação de respostas da API
 
 ---
 
-# Evidências
-
-As evidências de execução podem ser armazenadas na pasta:
-
-```text
-evidencias/
-├── web-tests.png
-└── api-trello.png
-```
-
-Após adicionar as imagens, basta referenciá-las no README:
-
-```markdown
-![Testes Web](./evidencias/web-tests.png)
-
-![Teste API Trello](./evidencias/api-trello.png)
-```
-
----
-
-# Melhorias futuras
-
-Como evolução deste projeto, podem ser implementadas as seguintes melhorias:
-
-- Relatórios de execução utilizando Mochawesome ou Allure Report;
-- Pipeline de Integração Contínua com GitHub Actions;
-- Execução parametrizada por ambiente;
-- Ampliação da cobertura dos testes de API;
-- Geração dinâmica de massa de dados para testes;
-- Integração com ferramentas de qualidade e análise de código.
-
----
-## Evidências da validação da API
+# Evidências da validação da API
 
 Antes da implementação da automação, foi realizada uma validação manual do endpoint utilizando o Postman para confirmar o comportamento esperado da API.
 
 Foram verificadas as seguintes condições:
 
-- Status Code **200 OK**;
-- Estrutura da resposta JSON;
-- Retorno do campo `data.list.name`;
-- Valor esperado: **Professional**.
+- Status Code **200 OK**
+- Estrutura da resposta JSON
+- Retorno do campo `data.list.name`
+- Valor esperado: **Professional**
 
 ### Validação manual da API (Postman)
 
@@ -280,7 +256,20 @@ Foram verificadas as seguintes condições:
 
 ![Pipeline GitHub Actions](evidencias/pipeline-success.png)
 
-# Nota de Transparência 
+---
+
+# Melhorias futuras
+
+Como evolução deste projeto, podem ser implementadas as seguintes melhorias:
+
+- Relatórios de execução utilizando Allure Report;
+- Execução paralela dos testes;
+- Ampliação da cobertura dos testes de API;
+- Integração com ferramentas de análise contínua de qualidade (SonarQube ou SonarCloud).
+
+---
+
+# Nota de Transparência
 
 Durante o desenvolvimento deste desafio utilizei **Inteligência Artificial (ChatGPT)** como ferramenta de apoio para pesquisa, esclarecimento de dúvidas, revisão técnica, organização da documentação e discussão de alternativas de implementação.
 

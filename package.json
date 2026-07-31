@@ -1,17 +1,28 @@
 {
-  "name": "desafio_cypress",
+  "name": "desafio-cypress",
   "version": "1.0.0",
-  "description": "",
+  "description": "Projeto de automação de testes Web e API utilizando Cypress, Cucumber e Page Object Model.",
   "main": "index.js",
+  "type": "commonjs",
   "scripts": {
     "cy:open": "cypress open",
     "cy:run": "cypress run",
-    "test": "cypress run"
+    "test": "cypress run",
+    "test:web": "cypress run --spec \"cypress/e2e/**/*.feature\"",
+    "test:api": "cypress run --spec \"cypress/e2e/api/**/*.js\""
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "cypress",
+    "qa",
+    "automation",
+    "bdd",
+    "cucumber",
+    "javascript",
+    "api",
+    "page-object"
+  ],
+  "author": "Jussara Gomes",
   "license": "ISC",
-  "type": "commonjs",
   "devDependencies": {
     "@badeball/cypress-cucumber-preprocessor": "^26.0.0",
     "@bahmutov/cypress-esbuild-preprocessor": "^2.2.8",
